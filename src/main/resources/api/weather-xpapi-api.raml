@@ -1,0 +1,39 @@
+#%RAML 1.0
+title: weather-papi-api
+description: This Api will call System api.
+
+traits:
+  headers: !include /exchange_modules/eb8c1062-8544-4cfa-a0c6-c3fc5c1c249d/common-fragment/1.0.0/trait/headers-trait.raml
+
+/weather:
+  /{ipAddress}:
+    get:
+      is:
+        - headers
+      responses:
+        200:
+          body:
+            application/json:
+              type: !include /exchange_modules/eb8c1062-8544-4cfa-a0c6-c3fc5c1c249d/common-fragment/1.0.0/dataType/common-weather-response-dataType.raml
+              example: !include /exchange_modules/eb8c1062-8544-4cfa-a0c6-c3fc5c1c249d/common-fragment/1.0.0/examples/common-weather-response-example.json  
+        400:
+          body:
+            application/json:
+              type: !include /exchange_modules/eb8c1062-8544-4cfa-a0c6-c3fc5c1c249d/common-fragment/1.0.0/dataType/common-error-dataType.raml
+              example: !include /exchange_modules/eb8c1062-8544-4cfa-a0c6-c3fc5c1c249d/common-fragment/1.0.0/examples/common-error-400-example.json
+        401:
+          body:
+            application/json:
+              type: !include /exchange_modules/eb8c1062-8544-4cfa-a0c6-c3fc5c1c249d/common-fragment/1.0.0/dataType/common-error-dataType.raml
+              example: !include /exchange_modules/eb8c1062-8544-4cfa-a0c6-c3fc5c1c249d/common-fragment/1.0.0/examples/common-error-401-example.json    
+        404:
+          body:
+            application/json:
+              type: !include /exchange_modules/eb8c1062-8544-4cfa-a0c6-c3fc5c1c249d/common-fragment/1.0.0/dataType/common-error-dataType.raml
+              example: !include /exchange_modules/eb8c1062-8544-4cfa-a0c6-c3fc5c1c249d/common-fragment/1.0.0/examples/common-error-404-example.json       
+        500:
+          body:
+            application/json:
+              type: !include /exchange_modules/eb8c1062-8544-4cfa-a0c6-c3fc5c1c249d/common-fragment/1.0.0/dataType/common-error-dataType.raml
+              example: !include /exchange_modules/eb8c1062-8544-4cfa-a0c6-c3fc5c1c249d/common-fragment/1.0.0/examples/common-error-500-example.json
+                

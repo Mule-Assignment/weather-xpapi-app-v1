@@ -1,0 +1,44 @@
+#%RAML 1.0 DataType
+
+type: object
+properties:
+  msg:
+    description: This element will contain error message
+    type: string
+    required: true
+    example: "failed operation"
+  code:
+    description: This element will contain error message
+    type: integer
+    required: true
+    example: 400
+  success:
+    description: This element will contain error message
+    type: boolean
+    required: true
+    example: false
+  eventId:
+    description: This element will contain error message
+    type: string
+    required: true
+    example: "hdsfhjdh-jxbv859-sjdf7643-376bbd458"      
+  error:
+    description: This element will contain error object details                
+    required: true
+    type: object
+    properties:
+      type:
+        description: This element will contain type
+        type: string
+        required: true
+        example: "NOT-FOUND"
+      title:
+        description: This element will contain title
+        type: string
+        required: true
+        example: "Resource not found"
+      details:
+        description: This element will contain details
+        type: string
+        required: true
+        example: "The URI requested is inavlid or the resource requested does not exist"    

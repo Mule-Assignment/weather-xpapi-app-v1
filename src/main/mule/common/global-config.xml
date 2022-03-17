@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	 <http:listener-config name="weather-xpapi-api-httpListenerConfig">
+        <http:listener-connection host="${http.host}" port="${http.port}" />
+    </http:listener-config>
+    <apikit:config name="weather-xpapi-api-config" api="weather-xpapi-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    
+	
+    <global-property doc:name="Global Property" doc:id="a6326169-8bce-4aae-abbd-fdeae4bc1ca0" name="env" value="local" />
+	<configuration-properties doc:name="Configuration properties" doc:id="2ee92bbc-c479-4202-9710-a2870529c646" file="properties/${env}.yaml" />
+	<http:request-config name="HTTP_Request_configuration_papi" doc:name="HTTP Request configuration" doc:id="988e76c0-999f-43c9-be10-7821e8b0118a" >
+		<http:request-connection host="${papi.host}" port="${papi.port}" />
+	</http:request-config>
+	
+	
+	
+	
+</mule>

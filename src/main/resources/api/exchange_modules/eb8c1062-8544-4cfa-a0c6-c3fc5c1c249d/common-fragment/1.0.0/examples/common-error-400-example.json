@@ -1,0 +1,11 @@
+{
+  "msg": "failed operation",
+  "code": 400,
+  "success": false,
+  "eventId": "hdsfhjdh-jxbv859-sjdf7643-376bbd458",
+  "error": {
+    "type": "NOT-FOUND",
+    "title": "Resource not found",
+    "details": "The URI requested is inavlid or the resource requested does not exist"
+  }
+}

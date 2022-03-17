@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+	
+	<sub-flow name="weather-implementation-flowSub_Flow" doc:id="a2f3a941-4e39-44a7-8b72-78190ab671cb" >
+		<logger level="INFO" doc:name="Logger" doc:id="c67ee96e-b3ff-40b0-88d0-ef092c54af10" />
+		<http:request method="GET" doc:name="Request to pathFileContent" doc:id="6900bfdb-f5ab-4db3-ab0f-c671459235c4" path="${papi.pathWeather}" config-ref="HTTP_Request_configuration_papi">
+			<http:headers><![CDATA[#[output application/java
+---
+{
+	"Authorization" : vars.authorization,
+	"transactionId" : attributes.headers.'transactionId'
+}]]]></http:headers>
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"ipAddress" : vars.ipAddress
+}]]]></http:uri-params>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="d57fe7c1-23ec-4ef5-936f-9a3f01a324a5" />
+	</sub-flow>
+</mule>
