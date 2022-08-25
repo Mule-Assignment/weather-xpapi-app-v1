@@ -9,7 +9,7 @@ http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/
 	
 	<sub-flow name="weather-implementation-flowSub_Flow" doc:id="a2f3a941-4e39-44a7-8b72-78190ab671cb" >
 		<logger level="INFO" doc:name="Request Logger" doc:id="c67ee96e-b3ff-40b0-88d0-ef092c54af10" message="Request logging for Weather API for transactionId : #[vars.transactionId]"/>
-		<http:request method="GET" doc:name="Request to pathFileContent" doc:id="6900bfdb-f5ab-4db3-ab0f-c671459235c4" path="${papi.pathWeather}" config-ref="HTTP_Request_configuration_papi">
+		<http:request method="GET" doc:name="Request to pathFileContent" doc:id="6900bfdb-f5ab-4db3-ab0f-c671459235c4" path="${papi.pathWeather}" config-ref="HTTP_Request_configuration_papi" responseTimeout="1000000">
 			<http:headers><![CDATA[#[output application/java
 ---
 {

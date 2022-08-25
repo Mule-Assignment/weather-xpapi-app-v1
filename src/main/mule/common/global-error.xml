@@ -87,7 +87,25 @@ output application/json
 		</error-handler>
 	<error-handler name="global-app-error_Handler" doc:id="2ac36b16-faa2-463d-b2a0-ac27c65b3bfb" >
 		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="73ba055d-5ea9-4736-bb39-b82f79a92ed9" >
-			<ee:transform doc:name="Transform Message" doc:id="10de7d72-686e-4691-8299-fe9a276a75cd" >
+			<choice doc:name="Choice" doc:id="f73c15ea-418b-453f-b99f-dd7a0e6e78e0" >
+				<when expression='#[error.description contains "421"]'>
+					<ee:transform doc:name="Transform Message" doc:id="e52b7ba0-a371-47a3-92c7-74f01ae19ec2" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": "unmapped postal code is sent"
+}]]></ee:set-payload>
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="httpStatus" ><![CDATA[500]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+			<logger level="INFO" doc:name="Error Logger" doc:id="fb5c8b04-458c-4fbe-aa70-1f73d5e5daf8" message="default error"/>
+		</when>
+				<otherwise >
+				<ee:transform doc:name="Transform Message" doc:id="dae33567-837a-4c7b-8213-9aee425e6168" >
 				<ee:message >
 					<ee:set-payload ><![CDATA[%dw 2.0
 output application/java
@@ -100,8 +118,11 @@ output application/java
 					<ee:set-variable variableName="httpStatus" ><![CDATA[500]]></ee:set-variable>
 				</ee:variables>
 			</ee:transform>
-			<logger level="INFO" doc:name="Error Logger" doc:id="240a21b0-32ba-453b-83dc-b6bdbe22dd1d" message="default error"/>
-		</on-error-propagate>
+			<logger level="INFO" doc:name="Error Logger" doc:id="ef2d61e6-d847-4243-91ca-d06cc24fb013" message="default error"/>
+		
+					</otherwise>
+			</choice>
+			</on-error-propagate>
 	</error-handler>
 	
 	
